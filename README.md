@@ -1,7 +1,8 @@
-# Video-compressor
-Simple video compressor for discord. 
+###### Simple video compressor for discord.
 
-Attempts to compress videos to under 10mb to allow them to be shared via discord.
+# Video-compressor
+
+Compresses videos to under 10mb to allow them to be shared via discord.
 
 ## Prerequisite:
 - Have python installed on your machine.
