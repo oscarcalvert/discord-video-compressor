@@ -7,14 +7,14 @@ Attempts to compress videos to under 10mb to allow them to be shared via discord
 - Have python installed on your machine.
 
 ## Setup Guide:
-1. Copy ```reduceVideoSize.py``` to a folder containing videos to be compressed. 
-2. In the same directory as  ```reduceVideoSize.py```, run ```py -m pip install moviepy``` in the terminal
+1. Copy ```compressor.py``` to a folder containing videos to be compressed. 
+2. In the same directory as  ```compressor.py```, run ```py -m pip install moviepy``` in the terminal
 
 ## Use Guide:
 ### Option 1:
-In the same directory as ```reduceVideoSize.py```, open the terminal and run ```py reduceVideoSize.py```. Then follow instructions.
+In the same directory as ```compressor.py```, open the terminal and run ```py compressor.py```. Then follow instructions.
 ### Option 2:
-In the same directory as ```reduceVideoSize.py```, open the terminal. You can now run ```py reduceVideoSize.py your_video.mp4```, where ```your_video.mp4``` is the video you are attempting to compress. 
+In the same directory as ```compressor.py```, open the terminal. You can now run ```py compressor.py your_video.mp4```, where ```your_video.mp4``` is the video you are attempting to compress. 
 
 ## Todo:
 - Support for other filetypes?
