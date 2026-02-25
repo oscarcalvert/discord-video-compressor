@@ -20,3 +20,5 @@ In the same directory as ```reduceVideoSize.py```, open the terminal. You can no
 - Support for other filetypes?
 - Mass-converting (converting a whole folder)
 - Move converted videos to a converted folder
+
+Note: AI was used in the creation of this project but it was reviewed and tested
