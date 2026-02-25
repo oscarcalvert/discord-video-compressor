@@ -1,5 +1,6 @@
 import sys
 import os
+import msvcrt
 from moviepy import VideoFileClip
 
 
@@ -55,10 +56,7 @@ def compress_video(input_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(" available video files in this directory:\n")
-
         valid_extensions = (".mp4", ".mov", ".mkv", ".avi", ".webm", ".wmv")
-
         current_files = [
             f
             for f in os.listdir(".")
@@ -66,19 +64,36 @@ if __name__ == "__main__":
         ]
 
         if not current_files:
-            print("  - no supported video files found in this folder.")
+            print("\n no supported video files found in this folder.")
+            sys.exit()
 
-        for file in current_files:
-            print(f"  - {file}")
+        selected_index = 0
 
-        print(
-            "\n type the exact name of the file you want to compress (including extension):"
-        )
-        chosen_file = input(" > ").strip()
+        while True:
+            os.system("cls" if os.name == "nt" else "clear")
+            print("available videos:")
 
-        if chosen_file in current_files:
-            compress_video(chosen_file)
-        else:
-            print("\n file not found. please check your spelling and try again.")
+            for i, file in enumerate(current_files):
+                if i == selected_index:
+                    print(f"    -> [ {file} ]")
+                else:
+                    print(f"       [ {file} ]")
+
+            key = msvcrt.getch()
+
+            if key == b"\xe0":
+                arrow = msvcrt.getch()
+                if arrow == b"H":
+                    selected_index = max(0, selected_index - 1)
+                    selected_index = min(len(current_files) - 1, selected_index + 1)
+
+            elif key in (b"\r", b"\n"):
+                print("\n")
+                compress_video(current_files[selected_index])
+                break
+
+            elif key == b"\x03":
+                print("\n exiting...")
+                break
     else:
         compress_video(sys.argv[1])
