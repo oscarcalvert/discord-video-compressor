@@ -55,9 +55,18 @@ def compress_video(input_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(" available files in this directory:\n")
+        print(" available video files in this directory:\n")
 
-        current_files = [f for f in os.listdir(".") if os.path.isfile(f)]
+        valid_extensions = (".mp4", ".mov", ".mkv", ".avi", ".webm", ".wmv")
+
+        current_files = [
+            f
+            for f in os.listdir(".")
+            if os.path.isfile(f) and f.lower().endswith(valid_extensions)
+        ]
+
+        if not current_files:
+            print("  - no supported video files found in this folder.")
 
         for file in current_files:
             print(f"  - {file}")
