@@ -31,7 +31,9 @@ def compress_video(input_path):
     else:
         print(f"new video bitrate: ~{int(video_bps/1000)} kbps.")
 
-    output_path = f"compressed_{os.path.basename(input_path)}"
+    filename, _ = os.path.splitext(os.path.basename(input_path))
+
+    output_path = f"compressed_{filename}.mp4"
 
     print("starting compression ...")
     print("-" * 50)
