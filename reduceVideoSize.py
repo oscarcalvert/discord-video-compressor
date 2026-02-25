@@ -5,6 +5,7 @@ from moviepy import VideoFileClip
 
 
 def compress_video(input_path):
+    # defines 8mb limit to stay under discord/email attachment thresholds
     target_size_mb = 8.0
 
     print("\nanalysing video ...")
@@ -19,6 +20,7 @@ def compress_video(input_path):
     duration = clip.duration
     print(f"duration: {duration:.2f} seconds.")
 
+    # converts mb to bits and divides by seconds to get bits per second
     total_target_bps = (target_size_mb * 1024 * 1024 * 8) / duration
 
     audio_bps = 128000
@@ -39,6 +41,7 @@ def compress_video(input_path):
     print("starting compression ...")
     print("-" * 50)
 
+    # library function to encode video with calculated bitrate constraints
     clip.write_videofile(
         output_path,
         bitrate=f"{int(video_bps)}",
@@ -79,8 +82,10 @@ if __name__ == "__main__":
                 else:
                     print(f"       [ {file} ]")
 
+            # catch single keystroke without enter
             key = msvcrt.getch()
 
+            # handles escape sequences for arrow keys on windows
             if key == b"\xe0":
                 arrow = msvcrt.getch()
                 if arrow == b"H":
@@ -88,10 +93,10 @@ if __name__ == "__main__":
                     selected_index = min(len(current_files) - 1, selected_index + 1)
 
             elif key in (b"\r", b"\n"):
-                print("\n")
                 compress_video(current_files[selected_index])
                 break
 
+            # handles ctrl+c interrupt signal
             elif key == b"\x03":
                 print("\n exiting...")
                 break
