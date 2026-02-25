@@ -55,8 +55,21 @@ def compress_video(input_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("\n no video provided.")
-        print(" usage: \n")
-        print(" > py reduceVideoSize.py <your_video.mp4>\n")
+        print(" available files in this directory:\n")
+
+        current_files = [f for f in os.listdir(".") if os.path.isfile(f)]
+
+        for file in current_files:
+            print(f"  - {file}")
+
+        print(
+            "\n type the exact name of the file you want to compress (including extension):"
+        )
+        chosen_file = input(" > ").strip()
+
+        if chosen_file in current_files:
+            compress_video(chosen_file)
+        else:
+            print("\n file not found. please check your spelling and try again.")
     else:
         compress_video(sys.argv[1])
