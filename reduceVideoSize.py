@@ -67,14 +67,15 @@ if __name__ == "__main__":
         ]
 
         if not current_files:
-            print("\n no supported video files found in this folder.")
+            print("\n no supported video files found in this folder.\n")
             sys.exit()
 
         selected_index = 0
 
         while True:
             os.system("cls" if os.name == "nt" else "clear")
-            print("available videos:")
+
+            print("available videos (click enter to select):\n")
 
             for i, file in enumerate(current_files):
                 if i == selected_index:
@@ -88,9 +89,20 @@ if __name__ == "__main__":
             # handles escape sequences for arrow keys on windows
             if key == b"\xe0":
                 arrow = msvcrt.getch()
+                # up arrow key
                 if arrow == b"H":
-                    selected_index = max(0, selected_index - 1)
-                    selected_index = min(len(current_files) - 1, selected_index + 1)
+                    selected_index = (selected_index - 1) % len(current_files)
+                # down arrow key
+                elif arrow == b"P":
+                    selected_index = (selected_index + 1) % len(current_files)
+
+            # up navigation with w key
+            elif key.lower() == b"w":
+                selected_index = (selected_index - 1) % len(current_files)
+
+            # down navigation with s key
+            elif key.lower() == b"s":
+                selected_index = (selected_index + 1) % len(current_files)
 
             elif key in (b"\r", b"\n"):
                 compress_video(current_files[selected_index])
